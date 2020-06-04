@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fluperapp.R;
 import com.example.fluperapp.Room.Product;
+import com.example.fluperapp.UpdateProductActivity;
 
 import java.util.List;
 
@@ -36,15 +37,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, final int position) {
         holder.textView.setText(productList.get(position).getName());
         holder.textView_body.setText(productList.get(position).getDescription());
-
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mCtx, CommentsActivity.class);
-                intent.putExtra("number",issueList.get(position).getNumber());
-                mCtx.startActivity(intent);
-            }
-        });*/
     }
 
     @Override
@@ -52,7 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textView;
         TextView textView_body;
@@ -62,6 +54,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             textView = itemView.findViewById(R.id.text_view_title);
             textView_body = itemView.findViewById(R.id.text_view_description);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Product product = productList.get(getAdapterPosition());
+
+            Intent intent = new Intent(mCtx, UpdateProductActivity.class);
+            intent.putExtra("product", product);
+
+            mCtx.startActivity(intent);
         }
     }
 }
