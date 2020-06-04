@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Fluper App</string>
+
+    <string-array name="name_array">
+        <item>Oppo</item>
+        <item>Vivo</item>
+        <item>Lenevo</item>
+        <item>Nokia</item>
+    </string-array>
+
+    <string-array name="desc_array">
+        <item>It is a product of Oppo.</item>
+        <item>It is a product of Vivo.</item>
+        <item>It is a product of Lenevo.</item>
+        <item>It is a product of Nokia.</item>
+    </string-array>
+
+    <integer-array name="reg_price_array">
+        <item>12000</item>
+        <item>17000</item>
+        <item>7000</item>
+        <item>5000</item>
+    </integer-array>
+
+    <integer-array name="sale_price_array">
+        <item>12500</item>
+        <item>19000</item>
+        <item>8500</item>
+        <item>7700</item>
+    </integer-array>
 </resources>

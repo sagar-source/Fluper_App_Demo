@@ -24,7 +24,7 @@ public class Product implements Serializable {
     @ColumnInfo(name = "sale_price")
     private int sale_price;
 
-    Product(String name,String description,int regular_price,int sale_price) {
+    public Product(String name, String description, int regular_price, int sale_price) {
         this.name = name;
         this.description = description;
         this.regular_price = regular_price;
