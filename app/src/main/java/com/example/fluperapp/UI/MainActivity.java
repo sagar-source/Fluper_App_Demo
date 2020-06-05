@@ -1,4 +1,4 @@
-package com.example.fluperapp;
+package com.example.fluperapp.UI;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.fluperapp.Adapter.ProductAdapter;
+import com.example.fluperapp.BitmapConverter;
+import com.example.fluperapp.R;
 import com.example.fluperapp.Room.Product;
 import com.example.fluperapp.ViewModel.ProductViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int index = 0;
     private String[] nameArray, descArray;
     private int[] regArray, saleArray;
+    private int[] imageArray = new int[]{R.drawable.oppo,R.drawable.vivo,R.drawable.lenovo_new,R.drawable.nokia};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        mProductViewModel.insert(new Product(nameArray[index],descArray[index],regArray[index],saleArray[index]));
+        mProductViewModel.insert(new Product(nameArray[index],descArray[index],regArray[index],saleArray[index], BitmapConverter.getBytesFromArray(getResources(),imageArray,index)));
 
         index = index + 1;
 

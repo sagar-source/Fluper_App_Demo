@@ -1,23 +1,27 @@
-package com.example.fluperapp;
+package com.example.fluperapp.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
+import com.example.fluperapp.R;
 import com.example.fluperapp.Room.Product;
 import com.example.fluperapp.ViewModel.ProductViewModel;
 
 public class UpdateProductActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextDesc, editTextRegPrice, editTextSalePrice;
+    private ImageView imageView;
     private ProductViewModel mProductViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +33,28 @@ public class UpdateProductActivity extends AppCompatActivity {
         editTextRegPrice = findViewById(R.id.edt_reg_price);
         editTextSalePrice = findViewById(R.id.edt_sale_price);
 
+        imageView = findViewById(R.id.product_image);
+
         mProductViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         final Product product = (Product) getIntent().getSerializableExtra("product");
 
         loadProduct(product);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(UpdateProductActivity.this,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.zoomimage_layout);
+
+                ImageView ivPreview = dialog.findViewById(R.id.iv_preview_image);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(product.getProduct_photo(), 0, product.getProduct_photo().length);
+                ivPreview.setImageBitmap(bitmap);
+
+                dialog.show();
+            }
+        });
 
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +94,8 @@ public class UpdateProductActivity extends AppCompatActivity {
         editTextDesc.setText(product.getDescription());
         editTextRegPrice.setText(String.valueOf(product.getRegular_price()));
         editTextSalePrice.setText(String.valueOf(product.getSale_price()));
+        Bitmap bitmap = BitmapFactory.decodeByteArray(product.getProduct_photo(), 0, product.getProduct_photo().length);
+        imageView.setImageBitmap(bitmap);
     }
 
     private void updateProduct(final Product product) {

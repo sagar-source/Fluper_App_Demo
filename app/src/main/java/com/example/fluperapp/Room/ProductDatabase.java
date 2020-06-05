@@ -1,6 +1,7 @@
 package com.example.fluperapp.Room;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.fluperapp.BitmapConverter;
+import com.example.fluperapp.R;
+
 @Database(entities = {Product.class}, version = 1,  exportSchema = false)
 public abstract class ProductDatabase extends RoomDatabase {
 
@@ -16,7 +20,10 @@ public abstract class ProductDatabase extends RoomDatabase {
 
     private static ProductDatabase INSTANCE;
 
+    private static Context context;
+
     public static ProductDatabase getDatabase(final Context context) {
+        INSTANCE.context = context;
         if (INSTANCE == null) {
             synchronized (ProductDatabase.class) {
                 if (INSTANCE == null) {
@@ -50,9 +57,9 @@ public abstract class ProductDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-                mDao.insert(new Product("Iphone 11 pro","It is a product of Apple.",100000,100500));
-                mDao.insert(new Product("Redmi k20 pro","It is a product of Xiaomi.",28000,30000));
-                mDao.insert(new Product("Galaxy note 10","It is a product of Samsung.",50000,55000));
+                mDao.insert(new Product("Iphone 11 pro","It is a product of Apple.",100000,100500,BitmapConverter.getBytesFromDrawable(INSTANCE.context.getResources(),R.drawable.iphone)));
+                mDao.insert(new Product("Redmi k20 pro","It is a product of Xiaomi.",28000,30000, BitmapConverter.getBytesFromDrawable(INSTANCE.context.getResources(),R.drawable.xiaomi)));
+                mDao.insert(new Product("Galaxy note 10","It is a product of Samsung.",50000,55000, BitmapConverter.getBytesFromDrawable(INSTANCE.context.getResources(),R.drawable.samsung)));
             return null;
         }
     }

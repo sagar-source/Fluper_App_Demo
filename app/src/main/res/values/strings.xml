@@ -28,4 +28,12 @@
         <item>8500</item>
         <item>7700</item>
     </integer-array>
+
+    <integer-array name="image_array">
+        <item>@drawable/oppo</item>
+        <item>@drawable/vivo</item>
+        <item>@drawable/lenovo_new</item>
+        <item>@drawable/nokia</item>
+    </integer-array>
+
 </resources>

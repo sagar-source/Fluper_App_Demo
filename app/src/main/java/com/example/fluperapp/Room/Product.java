@@ -24,11 +24,15 @@ public class Product implements Serializable {
     @ColumnInfo(name = "sale_price")
     private int sale_price;
 
-    public Product(String name, String description, int regular_price, int sale_price) {
+    @ColumnInfo(name = "product_photo", typeAffinity = ColumnInfo.BLOB)
+    private byte[] product_photo;
+
+    public Product(String name, String description, int regular_price, int sale_price, byte[] product_photo) {
         this.name = name;
         this.description = description;
         this.regular_price = regular_price;
         this.sale_price = sale_price;
+        this.product_photo = product_photo;
     }
 
 
@@ -73,6 +77,14 @@ public class Product implements Serializable {
 
     public void setSale_price(int sale_price) {
         this.sale_price = sale_price;
+    }
+
+    public byte[] getProduct_photo() {
+        return product_photo;
+    }
+
+    public void setProduct_photo(byte[] product_photo) {
+        this.product_photo = product_photo;
     }
 }
 
